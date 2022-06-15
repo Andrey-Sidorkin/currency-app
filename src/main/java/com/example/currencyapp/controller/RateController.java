@@ -9,7 +9,6 @@ import com.example.currencyapp.model.Rate;
 import com.example.currencyapp.service.CurrencyService;
 import com.example.currencyapp.service.RateService;
 import com.example.currencyapp.service.client.HttpClient;
-import com.example.currencyapp.service.client.OldHttpClient;
 import com.example.currencyapp.util.CodeValidator;
 import com.example.currencyapp.util.DateUtil;
 import java.time.LocalDate;

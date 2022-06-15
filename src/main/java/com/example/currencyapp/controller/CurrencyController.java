@@ -7,7 +7,6 @@ import com.example.currencyapp.dto.mapper.Mapper;
 import com.example.currencyapp.model.Currency;
 import com.example.currencyapp.service.CurrencyService;
 import com.example.currencyapp.service.client.HttpClient;
-import com.example.currencyapp.service.client.OldHttpClient;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
