@@ -4,7 +4,7 @@ import java.util.Map;
 import lombok.Data;
 
 @Data
-public class CurrencyApriDto {
+public class CurrencyApiDto {
     private boolean success;
     private Map<String, String> symbols;
 }

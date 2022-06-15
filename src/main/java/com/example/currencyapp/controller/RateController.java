@@ -9,6 +9,7 @@ import com.example.currencyapp.model.Rate;
 import com.example.currencyapp.service.CurrencyService;
 import com.example.currencyapp.service.RateService;
 import com.example.currencyapp.service.client.HttpClient;
+import com.example.currencyapp.service.client.OldHttpClient;
 import com.example.currencyapp.util.CodeValidator;
 import com.example.currencyapp.util.DateUtil;
 import java.time.LocalDate;
@@ -58,7 +59,7 @@ public class RateController {
         }
         String url = String.format("http://api.exchangeratesapi.io/v1/latest"
                 + "?access_key=%s&symbols=%s&format=1", apiKey, code);
-        RateApiDto apiDto = client.getData(RateApiDto.class, url);
+        RateApiDto apiDto = client.get(RateApiDto.class, url);
         RateResponseDto responseDto = responseMapper.map(apiDto, code);
         if (!rateService.isExist(LocalDate.now(), currencyService.findByCode(code))) {
             rateService.save(rateMapper.map(responseDto));
@@ -81,7 +82,7 @@ public class RateController {
         while (!dateFrom.isAfter(dateTo)) {
             String url = String.format("http://api.exchangeratesapi.io/v1/%s"
                     + "?access_key=%s&symbols=%s,format=1", dateFrom, apiKey, code);
-            RateApiDto apiDto = client.getData(RateApiDto.class, url);
+            RateApiDto apiDto = client.get(RateApiDto.class, url);
             responseDtos.add(responseMapper.map(apiDto, code));
             dateFrom = dateFrom.plusDays(1);
         }

@@ -3,7 +3,7 @@ package com.example.currencyapp.service.client;
 import org.junit.jupiter.api.Test;
 
 class HttpClientTest {
-    private HttpClient client;
+    private OldHttpClient client;
 
     @Test
     void getData_ok() {

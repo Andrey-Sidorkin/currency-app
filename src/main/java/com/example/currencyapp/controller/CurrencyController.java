@@ -1,12 +1,13 @@
 package com.example.currencyapp.controller;
 
-import com.example.currencyapp.dto.CurrencyApriDto;
+import com.example.currencyapp.dto.CurrencyApiDto;
 import com.example.currencyapp.dto.CurrencyResponseDto;
 import com.example.currencyapp.dto.mapper.CurrencyResponseMapper;
 import com.example.currencyapp.dto.mapper.Mapper;
 import com.example.currencyapp.model.Currency;
 import com.example.currencyapp.service.CurrencyService;
 import com.example.currencyapp.service.client.HttpClient;
+import com.example.currencyapp.service.client.OldHttpClient;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -45,7 +46,7 @@ public class CurrencyController {
         if (currencies.isEmpty()) {
             String url = String.format("http://api.exchangeratesapi.io/v1/symbols?access_key=%s",
                     apiKey);
-            CurrencyApriDto apiDto = client.getData(CurrencyApriDto.class, url);
+            CurrencyApiDto apiDto = client.get(CurrencyApiDto.class, url);
             for (Map.Entry<String, String> entry : apiDto.getSymbols().entrySet()) {
                 dtos.add(responseMapper.map(entry.getKey(), entry.getValue()));
             }
