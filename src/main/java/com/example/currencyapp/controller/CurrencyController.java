@@ -7,12 +7,12 @@ import com.example.currencyapp.dto.mapper.Mapper;
 import com.example.currencyapp.model.Currency;
 import com.example.currencyapp.service.CurrencyService;
 import com.example.currencyapp.service.client.HttpClient;
-import com.example.currencyapp.service.client.OldHttpClient;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,23 +20,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/currencies")
+@RequiredArgsConstructor
 public class CurrencyController {
-    private final String apiKey;
+    @Value("${access.key}")
+    private String apiKey;
     private final CurrencyService currencyService;
     private final HttpClient client;
     private final Mapper<Currency, CurrencyResponseDto> mapper;
     private final CurrencyResponseMapper responseMapper;
-
-    public CurrencyController(@Value("${access.key}") String apiKey,
-                              CurrencyService currencyService, HttpClient client,
-                              Mapper<Currency, CurrencyResponseDto> mapper,
-                              CurrencyResponseMapper responseMapper) {
-        this.apiKey = apiKey;
-        this.currencyService = currencyService;
-        this.client = client;
-        this.mapper = mapper;
-        this.responseMapper = responseMapper;
-    }
 
     @PostConstruct
     @GetMapping

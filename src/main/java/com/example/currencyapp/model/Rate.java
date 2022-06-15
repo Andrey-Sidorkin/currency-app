@@ -8,12 +8,23 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedAttributeNode;
+import javax.persistence.NamedEntityGraph;
+import javax.persistence.NamedSubgraph;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Entity
-@AllArgsConstructor
 @Table(name = "rates")
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+@ToString
 public class Rate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,41 +34,6 @@ public class Rate {
     private double currentRate;
     @ManyToOne
     private Currency currency;
-
-    public Rate() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
-    public double getCurrentRate() {
-        return currentRate;
-    }
-
-    public void setCurrentRate(double currentRate) {
-        this.currentRate = currentRate;
-    }
-
-    public Currency getCurrency() {
-        return currency;
-    }
-
-    public void setCurrency(Currency currency) {
-        this.currency = currency;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -76,15 +52,5 @@ public class Rate {
     @Override
     public int hashCode() {
         return Objects.hash(id, date, currentRate, currency);
-    }
-
-    @Override
-    public String toString() {
-        return "Rate{"
-                + "id=" + id
-                + ", date=" + date
-                + ", currentRate=" + currentRate
-                + ", currency=" + currency
-                + '}';
     }
 }

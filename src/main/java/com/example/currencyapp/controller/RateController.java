@@ -9,13 +9,13 @@ import com.example.currencyapp.model.Rate;
 import com.example.currencyapp.service.CurrencyService;
 import com.example.currencyapp.service.RateService;
 import com.example.currencyapp.service.client.HttpClient;
-import com.example.currencyapp.service.client.OldHttpClient;
 import com.example.currencyapp.util.CodeValidator;
 import com.example.currencyapp.util.DateUtil;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,31 +26,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/rates")
+@RequiredArgsConstructor
 public class RateController {
     private static final String DATE_PATTERN = DateUtil.DATE_PATTERN;
-    private final String apiKey;
+    @Value("${access.key}")
+    private String apiKey;
     private final HttpClient client;
     private final RateService rateService;
     private final CurrencyService currencyService;
     private final RateMapper rateMapper;
     private final RateResponseMapper responseMapper;
     private final CodeValidator validator;
-
-    public RateController(@Value("${access.key}") String apiKey,
-                          HttpClient client,
-                          RateService rateService,
-                          CurrencyService currencyService,
-                          RateMapper rateMapper,
-                          RateResponseMapper responseMapper,
-                          CodeValidator validator) {
-        this.apiKey = apiKey;
-        this.client = client;
-        this.rateService = rateService;
-        this.currencyService = currencyService;
-        this.rateMapper = rateMapper;
-        this.responseMapper = responseMapper;
-        this.validator = validator;
-    }
 
     @GetMapping("/{code}")
     public RateResponseDto getRate(@PathVariable("code") String code) {
