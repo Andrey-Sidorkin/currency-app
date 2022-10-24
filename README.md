@@ -1,4 +1,4 @@
-# Currency app is created
+# Currency App
 
 On start it downloads currency codes and corresponding currency names from an external API and stores them to DB.
 You can operate the app and get json responses using the following endpoints:
